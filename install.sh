@@ -14,11 +14,13 @@ nix-channel --update
 nix-channel --list
 nix --version
 
+nix-store --gc
+nix-collect-garbage -d
+
 # nix profile install nixpkgs#direnv # with flakes
 nix-env -iA nixpkgs.direnv # without flakes
 
-nix-collect-garbage -d
-nix-store --optimise
+nix-store --optimise &
 
 echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
 echo 'export DIRENV_LOG_FORMAT=""' >> ~/.zshrc
@@ -27,3 +29,7 @@ echo 'export DIRENV_LOG_FORMAT=""' >> ~/.bashrc
 
 echo "echo 'Hello! Welcome to your dev environment 👋'" >> ~/.zshrc
 echo "echo 'Hello! Welcome to your dev environment 👋'" >> ~/.bashrc
+
+echo "\nset current shell with: \n\n . ~/.nix-profile/etc/profile.d/nix.sh\n\n"
+nix --version
+nix-channel --list
