@@ -17,7 +17,7 @@
 # fi
 
 
-curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate --no-confirm
+curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
