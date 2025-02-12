@@ -1,25 +1,13 @@
 #!/usr/bin/env bash
 
-# # Detect if script is being piped
-# if [ -t 0 ]; then
-#     # Running directly
-#     if [ "$EUID" -ne 0 ]; then 
-#         echo "Elevating privileges..."
-#         exec sudo "$0" "$@"
-#         exit $?
-#     fi
-# else
-#     # Being piped through curl
-#     if [ "$EUID" -ne 0 ]; then
-#         echo "Please run with sudo"
-#         exit 1
-#     fi
-# fi
-
+if ! dpkg -l | grep xz-utils; then
+    echo "xz-utils is not installed. Please install it and run this again."
+    exit 1
+fi
 
 curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
-. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+. /home/q/.nix-profile/etc/profile.d/nix.sh
 
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 nix-channel --update --extra-substituters https://cache.nixos.org
