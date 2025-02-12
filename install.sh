@@ -19,7 +19,7 @@
 
 curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate --no-confirm
 
-source /etc/profile.d/nix.sh
+. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
 nix profile install nixpkgs#direnv
 echo 'eval "$(direnv hook zsh)"' >> /etc/zsh/zshrc
