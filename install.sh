@@ -1,11 +1,22 @@
 #!/usr/bin/env bash
 
-# Check if script is run as root
-if [ "$EUID" -ne 0 ]; then 
-    echo "Elevating privileges..."
-    exec sudo "$0" "$@"
-    exit $?
+# Detect if script is being piped
+if [ -t 0 ]; then
+    # Running directly
+    if [ "$EUID" -ne 0 ]; then 
+        echo "Elevating privileges..."
+        exec sudo "$0" "$@"
+        exit $?
+    fi
+else
+    # Being piped through curl
+    if [ "$EUID" -ne 0 ]; then
+        echo "Please run with sudo"
+        exit 1
+    fi
 fi
+
+...existing code...
 
 apt-get update
 apt-get upgrade
