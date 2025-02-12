@@ -20,7 +20,7 @@ nix-collect-garbage -d
 # nix profile install nixpkgs#direnv # with flakes
 nix-env -iA nixpkgs.direnv # without flakes
 
-nix-store --optimise &> /dev/null &
+nix-store --optimise
 
 echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
 echo 'export DIRENV_LOG_FORMAT=""' >> ~/.zshrc
