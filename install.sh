@@ -21,11 +21,20 @@ curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determin
 
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
-nix profile install nixpkgs#direnv
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+nix --extra-substituters https://cache.nixos.org channel --update
+nix-channel --list
+nix --version
+
+nix --extra-substituters https://cache.nixos.org profile install nixpkgs#direnv
+
+nix-collect-garbage -d
+nix-store --optimise
+
 echo 'eval "$(direnv hook zsh)"' >> /etc/zsh/zshrc
 echo 'export DIRENV_LOG_FORMAT=""' >> /etc/zsh/zshrc
 echo 'eval "$(direnv hook bash)"' >> /etc/bash.bashrc
 echo 'export DIRENV_LOG_FORMAT=""' >> /etc/bash.bashrc
 
-echo "echo 'Hello! Welcome to your dev container 👋'" >> /etc/zsh/zshrc
-echo "echo 'Hello! Welcome to your dev container 👋'" >> /etc/bash.bashrc
+echo "echo 'Hello! Welcome to your dev environment 👋'" >> /etc/zsh/zshrc
+echo "echo 'Hello! Welcome to your dev environment 👋'" >> /etc/bash.bashrc
