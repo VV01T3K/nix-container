@@ -1,28 +1,21 @@
 #!/usr/bin/env bash
 
-# Detect if script is being piped
-if [ -t 0 ]; then
-    # Running directly
-    if [ "$EUID" -ne 0 ]; then 
-        echo "Elevating privileges..."
-        exec sudo "$0" "$@"
-        exit $?
-    fi
-else
-    # Being piped through curl
-    if [ "$EUID" -ne 0 ]; then
-        echo "Please run with sudo"
-        exit 1
-    fi
-fi
+# # Detect if script is being piped
+# if [ -t 0 ]; then
+#     # Running directly
+#     if [ "$EUID" -ne 0 ]; then 
+#         echo "Elevating privileges..."
+#         exec sudo "$0" "$@"
+#         exit $?
+#     fi
+# else
+#     # Being piped through curl
+#     if [ "$EUID" -ne 0 ]; then
+#         echo "Please run with sudo"
+#         exit 1
+#     fi
+# fi
 
-...existing code...
-
-apt-get update
-apt-get upgrade
-apt update -y
-apt upgrade -y
-apt autoremove -y
 
 curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate --no-confirm
 
