@@ -10,11 +10,12 @@ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 . ~/.nix-profile/etc/profile.d/nix.sh
 
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-nix-channel --update --extra-substituters https://cache.nixos.org
+nix-channel --update
 nix-channel --list
 nix --version
 
-nix --extra-substituters https://cache.nixos.org profile install nixpkgs#direnv
+# nix profile install nixpkgs#direnv # with flakes
+nix-env -iA nixpkgs.direnv # without flakes
 
 nix-collect-garbage -d
 nix-store --optimise
