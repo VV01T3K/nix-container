@@ -22,7 +22,7 @@ curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determin
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-nix --extra-substituters https://cache.nixos.org channel --update
+nix-channel --update --extra-substituters https://cache.nixos.org
 nix-channel --list
 nix --version
 
