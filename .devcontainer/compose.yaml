@@ -3,9 +3,9 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    container_name: nix-container
+    container_name: ${localWorkspaceFolderBasename}
     volumes:
-      - ..:/workspaces/nix-container:cached
+      - ..:/workspaces/${localWorkspaceFolderBasename}:cached
       - nix:/nix
 
 volumes:
