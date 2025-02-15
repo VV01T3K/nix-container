@@ -1,12 +1,13 @@
 services:
-  devcontainer:
+  dev:
     build: 
       context: .
       dockerfile: Dockerfile
-    container_name: nix-container
     volumes:
-      - ..:/workspaces/nix-container:cached
+      - ../..:/workspaces:cached
       - nix:/nix
+    command: sleep infinity
 
 volumes:
   nix:
+    name: nix-store

@@ -1,0 +1,79 @@
+name: Test Development Environment
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Add cache steps
+      - name: Set up Docker Layer Caching
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Check all configurations
+        run: |
+          # Validate compose.yml
+          cd .devcontainer
+          docker compose config
+          
+          # Check Dockerfile (basic syntax)
+          docker run --rm -i hadolint/hadolint < Dockerfile || true
+
+      - name: Build Docker image
+        run: |
+          cd .devcontainer
+          # Build with cache
+          docker buildx build \
+            --cache-from type=local,src=/tmp/.buildx-cache \
+            --cache-to type=local,dest=/tmp/.buildx-cache-new \
+            --load \
+            -t devcontainer . 
+          # Move cache
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Spin up Docker container
+        run: |
+          cd .devcontainer
+          docker compose up -d
+
+      - name: Test configuration
+        run: |
+          cd .devcontainer
+          # Fix Git repository permissions
+          docker compose exec -T dev bash -c '
+            # Fix Git repository permissions
+            sudo chown -R $(id -u):$(id -g) /workspaces/nix-container
+            git config --global --add safe.directory /workspaces/nix-container
+            touch /workspaces/nix-container/.nix/flake.lock
+          '
+          # Test development environment
+          docker compose exec -T dev bash -c '
+            set -e
+            nix --version || exit 1
+            direnv --version || exit 1
+            cd /workspaces/nix-container/.nix
+            nix flake check || exit 1
+            nix develop -c bun --version || exit 1
+            nix develop -c lolcat --version || exit 1
+          '
+
+      - name: Spin down Docker container
+        run: |
+          cd .devcontainer
+          docker compose down -v
