@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  devcontainer:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: nix-devcontainer
+    volumes:
+      - ..:/workspaces/${localWorkspaceFolderBasename}:cached
+      - nix:/nix
+
+volumes:
+  nix:
+    name: nix-store
