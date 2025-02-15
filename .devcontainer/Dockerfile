@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/base:alpine-3.20
 
-# VOLUME /nix
+VOLUME /nix
 
 # Update and upgrade
 RUN apk update && apk upgrade
