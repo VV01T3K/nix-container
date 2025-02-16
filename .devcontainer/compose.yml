@@ -11,3 +11,4 @@ services:
 
 volumes:
   nix:
+    name: nix-store
