@@ -1,22 +1,8 @@
-// {
-// 	"name": "Nix",
-// 	"dockerComposeFile": "compose.yaml",
-// 	"service": "devcontainer",
-// 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-// 	"customizations": {
-// 		"vscode": {
-// 			"extensions": [
-// 				"bbenoist.Nix"
-// 			]
-// 		}
-// 	}
-// 	// "postCreateCommand": "nix-channel --add https://nixos.org/channels/nixpkgs-unstable && nix-channel --update && nix-channel --list && nix --version && echo 'Container setup complete!'"
-// }
 {
 	"name": "Nix",
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
+	"dockerComposeFile": "compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"customizations": {
 		"vscode": {
 			"extensions": [
