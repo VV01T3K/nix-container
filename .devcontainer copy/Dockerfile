@@ -20,9 +20,9 @@ USER root
 # RUN mkdir -p /etc/nix
 # RUN echo 'sandbox = false' >> /etc/nix/nix.conf \
 #     && echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf
-#     #  \
-#     # && nix-channel --add https://nixos.org/channels/nixpkgs-unstable \
-#     # && nix-channel --update
+    #  \
+    # && nix-channel --add https://nixos.org/channels/nixpkgs-unstable \
+    # && nix-channel --update
 
 # # Add Nix to shell environments
 # RUN echo '. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' >> /etc/zsh/zshrc && \

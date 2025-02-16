@@ -22,9 +22,9 @@ USER root
 #     # && nix-channel --add https://nixos.org/channels/nixpkgs-unstable \
 #     # && nix-channel --update
 
-# # Add Nix to shell environments
-# RUN echo '. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' >> /etc/zsh/zshrc && \
-#     echo '. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' >> /etc/bash.bashrc
+# Add Nix to shell environments
+RUN echo '. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' >> /etc/zsh/zshrc && \
+    echo '. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' >> /etc/bash.bashrc
 
 # # Install direnv
 # RUN nix profile install nixpkgs#direnv
@@ -35,5 +35,5 @@ USER root
 #     echo 'eval "$(direnv hook bash)"' >> /etc/bash.bashrc && \
 #     echo 'export DIRENV_LOG_FORMAT=""' >> /etc/bash.bashrc
 
-# # Welcome message
-# RUN echo "echo 'Hello! Welcome to your dev container 👋'" >> /etc/zsh/zshrc
+# Welcome message
+RUN echo "echo 'Hello! Welcome to your dev container 👋'" >> /etc/zsh/zshrc
