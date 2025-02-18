@@ -7,11 +7,9 @@ on:
     branches: [ nix-wsl ]
 
 jobs:
-  test-environment:
+  test-remote-install:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v4
       - name: Instalation
         run: |
           curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/install.sh | sh
@@ -25,3 +23,23 @@ jobs:
       - name: Uninstall
         run: |
           curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/uninstall.sh | sh
+
+  test-local-install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Instalation
+        run: |
+          ./install.sh
+      
+      - name: Test
+        run: |
+          . $HOME/.nix-profile/etc/profile.d/nix.sh
+          nix --version
+          direnv --version
+
+      - name: Uninstall
+        run: |
+          ./uninstall.sh
