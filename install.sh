@@ -17,7 +17,7 @@ if ! grep -q "experimental-features = nix-command flakes" /etc/nix/nix.conf 2>/d
     echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
 fi
 
-. ~/.nix-profile/etc/profile.d/nix.sh
+. $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # Add update channel to bleeding edge :v
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
@@ -37,30 +37,30 @@ fi
 nix-store --optimise
 
 # Add shell configurations only if they don't exist
-if [ -f ~/.zshrc ]; then
-    if ! grep -q "direnv hook zsh" ~/.zshrc; then
-        echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
-        echo 'export DIRENV_LOG_FORMAT=""' >> ~/.zshrc
+if [ -f $HOME/.zshrc ]; then
+    if ! grep -q "direnv hook zsh" $HOME/.zshrc; then
+        echo 'eval "$(direnv hook zsh)"' >> $HOME/.zshrc
+        echo 'export DIRENV_LOG_FORMAT=""' >> $HOME/.zshrc
     fi
-    if ! grep -q "Hello! Welcome to your dev environment" ~/.zshrc; then
-        echo "echo 'Hello! Welcome to your dev environment 👋'" >> ~/.zshrc
+    if ! grep -q "Hello! Welcome to your dev environment" $HOME/.zshrc; then
+        echo "echo 'Hello! Welcome to your dev environment 👋'" >> $HOME/.zshrc
     fi
 fi
 
-if [ -f ~/.bashrc ]; then
-    if ! grep -q "direnv hook bash" ~/.bashrc; then
-        echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
-        echo 'export DIRENV_LOG_FORMAT=""' >> ~/.bashrc
+if [ -f $HOME/.bashrc ]; then
+    if ! grep -q "direnv hook bash" $HOME/.bashrc; then
+        echo 'eval "$(direnv hook bash)"' >> $HOME/.bashrc
+        echo 'export DIRENV_LOG_FORMAT=""' >> $HOME/.bashrc
     fi
-    if ! grep -q "Hello! Welcome to your dev environment" ~/.bashrc; then
-        echo "echo 'Hello! Welcome to your dev environment 👋'" >> ~/.bashrc
+    if ! grep -q "Hello! Welcome to your dev environment" $HOME/.bashrc; then
+        echo "echo 'Hello! Welcome to your dev environment 👋'" >> $HOME/.bashrc
     fi
 fi
 
 echo "
 set current shell with: 
 
- . ~/.nix-profile/etc/profile.d/nix.sh
+ . $HOME/.nix-profile/etc/profile.d/nix.sh
 
 "
 nix --version
