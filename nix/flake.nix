@@ -12,9 +12,9 @@
         pkgs = nixpkgs.legacyPackages.${system};
         bun-canary = pkgs.callPackage ./bun-canary.nix {};
       in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
+      with pkgs; {
+        devShells.default = mkShell {
+          buildInputs = with pkgs; [
             bun-canary
             # Add other dependencies here
           ];
