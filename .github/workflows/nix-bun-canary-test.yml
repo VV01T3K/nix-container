@@ -6,7 +6,8 @@ on:
   pull_request:
     branches: [ nix-bun-canary ]
 
-test-remote-install:
+jobs:
+  tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
