@@ -14,9 +14,9 @@ A simple setup script for installing Nix package manager with direnv integration
 
 - Linux-based environment
 - bash or zsh shell
-- sudo access
-- curl
-- xz (xz-utils)
+- `sudo` access
+- `curl`
+- `xz` (xz-utils)
 
 ## Quick Start
 
@@ -25,7 +25,6 @@ A simple setup script for installing Nix package manager with direnv integration
 curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/install.sh | sh
 ```
 
-### Post-Installation
 After installation, set up your current shell with:
 ```bash
 . $HOME/.nix-profile/etc/profile.d/nix.sh
