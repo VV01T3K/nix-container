@@ -4,25 +4,19 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    bun-canary.url = "github:VV01T3K/nix-container/nix-bun-canary";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+  outputs = { self, nixpkgs, flake-utils, bun-canary }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        bun = bun-canary.packages.${system}.default;
       in
-      with pkgs;
-      {
+      with pkgs; {
         devShells.default = mkShell {
-          buildInputs = with pkgs; [
+          buildInputs = [
             bun
-
             lolcat
             # Add other dependencies here
           ];
