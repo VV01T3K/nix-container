@@ -35,11 +35,11 @@ RUN nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && \
 RUN nix profile install nixpkgs#direnv
 
 # Setup direnv and welcome message for zsh and bash
-RUN echo "eval \"$(direnv hook zsh)\"" >> ~/.zshrc && \
-    echo "export DIRENV_LOG_FORMAT=\"\"" >> ~/.zshrc && \
-    echo "eval \"$(direnv hook bash)\"" >> ~/.bashrc && \
-    echo "export DIRENV_LOG_FORMAT=\"\"" >> ~/.bashrc && \
-    echo "echo 'Hello! Welcome to your dev container 👋'" >> ~/.zshrc && \
-    echo "echo 'Hello! Welcome to your dev container 👋'" >> ~/.bashrc
+RUN echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc && \
+    echo 'export DIRENV_LOG_FORMAT=""' >> ~/.zshrc && \
+    echo 'eval "$(direnv hook bash)"' >> ~/.bashrc && \
+    echo 'export DIRENV_LOG_FORMAT=""' >> ~/.bashrc && \
+    echo 'echo "Hello! Welcome to your dev container 👋"' >> ~/.zshrc && \
+    echo 'echo "Hello! Welcome to your dev container 👋"' >> ~/.bashrc
 
 USER vscode
