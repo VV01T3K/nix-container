@@ -10,7 +10,7 @@ RUN apk add --no-cache curl xz
     
 USER vscode
 
-# Install unstable Nix
+# Install Nix
 RUN curl -L https://nixos.org/nix/install -o /tmp/nix-install.sh && \
     sh /tmp/nix-install.sh --no-daemon && \
     rm /tmp/nix-install.sh
