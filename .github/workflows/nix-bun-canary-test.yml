@@ -6,16 +6,15 @@ on:
   pull_request:
     branches: [ nix-bun-canary ]
 
-jobs:
-  tests:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
+test-remote-install:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@main
-    - uses: DeterminateSystems/magic-nix-cache-action@main
+
+    - name: Instalation
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/install.sh | sh
+        . $HOME/.nix-profile/etc/profile.d/nix.sh
     
     - name: Build package
       run: nix build
@@ -27,3 +26,11 @@ jobs:
       run: |
         result/bin/bun --version
         result/bin/bunx-canary --version
+
+    - name: Cache Dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/nix
+          /nix/store
+        key: ${{ runner.os }}-nix-${{ hashFiles('**/flake.lock') }}
