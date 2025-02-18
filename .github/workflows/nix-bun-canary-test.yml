@@ -15,6 +15,7 @@ jobs:
     - name: Instalation
       run: |
         curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+        sudo mkdir -p /etc/nix
         echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
     
     - name: Build package
