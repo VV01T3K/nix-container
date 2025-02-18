@@ -1,0 +1,14 @@
+name: Test Install Script
+
+on:
+  push:
+    branches: [ nix-wsl ]
+  pull_request:
+    branches: [ nix-wsl ]
+
+jobs:
+  test-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
