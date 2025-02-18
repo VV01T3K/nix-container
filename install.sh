@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
-if ! dpkg -l | grep xz-utils; then
-    echo "xz-utils is not installed. Please install it and run this again."
-    exit 1
-fi
+set -e  # Exit on any error
+
+# if ! dpkg -l | grep xz-utils; then
+#     echo "xz-utils is not installed. Please install it and run this again."
+#     exit 1
+# fi
 
 curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+
+mkdir -p /etc/nix
+# echo 'sandbox = false' >> /etc/nix/nix.conf
+echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf # enable flakes
 
 . ~/.nix-profile/etc/profile.d/nix.sh
 
@@ -17,8 +23,8 @@ nix --version
 nix-store --gc
 nix-collect-garbage -d
 
-# nix profile install nixpkgs#direnv # with flakes
-nix-env -iA nixpkgs.direnv # without flakes
+nix profile install nixpkgs#direnv  # with flakes
+# nix-env -iA nixpkgs.direnv        # without flakes
 
 nix-store --optimise
 
