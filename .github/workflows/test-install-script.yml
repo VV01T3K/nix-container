@@ -10,5 +10,18 @@ jobs:
   test-environment:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # - name: Checkout code
+      #   uses: actions/checkout@v4
+      - name: Instalation
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/install.sh | sh
+      
+      - name: Test
+        run: |
+          . $HOME/.nix-profile/etc/profile.d/nix.sh
+          nix --version
+          direnv --version
+
+      - name: Uninstall
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/uninstall.sh | sh
