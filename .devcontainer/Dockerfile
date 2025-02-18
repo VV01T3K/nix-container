@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/base:alpine-3.20
 
+# Use "external" volume to store Nix store
 VOLUME /nix
 
 # Update and upgrade
@@ -24,6 +25,7 @@ RUN echo 'sandbox = false' >> /etc/nix/nix.conf \
 USER vscode
 
 # Add Nix to the PATH
+# for docker to pick up the nix command
 ENV PATH="/home/vscode/.nix-profile/bin:${PATH}"
 
 RUN nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs && \
