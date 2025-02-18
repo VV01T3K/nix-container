@@ -30,7 +30,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Instalation
+      - name: Make scripts executable
+        run: |
+          chmod +x ./install.sh
+          chmod +x ./uninstall.sh
+
+      - name: Installation
         run: |
           ./install.sh
       
