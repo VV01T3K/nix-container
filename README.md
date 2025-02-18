@@ -6,13 +6,8 @@ This repository contains a Nix package for the Bun JavaScript runtime (canary ve
 
 You can use this package in several ways:
 
-### With `nix run`
 
-```bash
-nix run github:VV01T3K/nix-container/nix-bun-canary
-```
-
-### As a flake input
+### As a flake input (recommended)
 
 Add to your `flake.nix`:
 
@@ -27,11 +22,16 @@ Add to your `flake.nix`:
   };
 }
 ```
+### With `nix run`
+
+```bash
+nix run github:VV01T3K/nix-container/nix-bun-canary --no-write-lock-file
+```
 
 ### With `nix shell`
 
 ```bash
-nix shell github:VV01T3K/nix-container/nix-bun-canary
+nix shell github:VV01T3K/nix-container/nix-bun-canary --no-write-lock-file
 ```
 
 ## Supported Platforms
