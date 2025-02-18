@@ -2,16 +2,11 @@
 
 set -e  # Exit on any error
 
-# if ! dpkg -l | grep xz-utils; then
-#     echo "xz-utils is not installed. Please install it and run this again."
-#     exit 1
-# fi
-
 curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
 sudo mkdir -p /etc/nix
 # echo 'sandbox = false' >> /etc/nix/nix.conf
-sudo echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf # enable flakes
+echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf # enable flakes
 
 . ~/.nix-profile/etc/profile.d/nix.sh
 
