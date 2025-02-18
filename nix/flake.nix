@@ -10,7 +10,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        bun-canary = pkgs.callPackage ./Nix/bun-canary.nix {};
+        bun-canary = pkgs.callPackage ./bun-canary.nix {};
       in
       {
         devShells.default = pkgs.mkShell {
