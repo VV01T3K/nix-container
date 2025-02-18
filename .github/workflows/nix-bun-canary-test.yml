@@ -15,13 +15,12 @@ jobs:
     - name: Instalation
       run: |
         curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/install.sh | sh
-        . $HOME/.nix-profile/etc/profile.d/nix.sh
     
     - name: Build package
-      run: nix build
+      run: . $HOME/.nix-profile/etc/profile.d/nix.sh && nix build
     
     - name: Check flake
-      run: nix flake check
+      run: . $HOME/.nix-profile/etc/profile.d/nix.sh && nix flake check
     
     - name: Verify bun-canary execution
       run: |
