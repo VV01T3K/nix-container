@@ -9,9 +9,9 @@ set -e  # Exit on any error
 
 curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
-mkdir -p /etc/nix
+sudo mkdir -p /etc/nix
 # echo 'sandbox = false' >> /etc/nix/nix.conf
-echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf # enable flakes
+sudo echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf # enable flakes
 
 . ~/.nix-profile/etc/profile.d/nix.sh
 
