@@ -4,22 +4,19 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    bun-canary.url = "github:VV01T3K/nix-container/nix-bun-canary";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, bun-canary }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        bun-canary = pkgs.callPackage (pkgs.fetchurl {
-          url = "https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-bun-cannary/bun-canary.nix";
-          sha256 = null;
-        }) {};
+        bun = bun-canary.packages.${system}.default;
       in
       with pkgs; {
         devShells.default = mkShell {
-          buildInputs = with pkgs; [
-            bun-canary
-
+          buildInputs = [
+            bun
             lolcat
             # Add other dependencies here
           ];
@@ -29,5 +26,6 @@
             echo "Using Bun version: $BUN_VERSION" | lolcat
           '';
         };
-      });
+      }
+    );
 }
