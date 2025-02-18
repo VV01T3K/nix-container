@@ -13,7 +13,7 @@
       in
       {
         packages = {
-          bun-canary = pkgs.callPackage ./packages/bun-canary { };
+          bun-canary = pkgs.callPackage ./packages/bun-canary.nix { };
           default = self.packages.${system}.bun-canary;
         };
       }
