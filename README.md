@@ -1,4 +1,4 @@
-# Quick nix for wsl setup
+# Quick nix for wsl
 
 A simple setup script for installing Nix package manager with direnv integration in WSL.
 
@@ -25,13 +25,13 @@ A simple setup script for installing Nix package manager with direnv integration
 curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/install.sh | sh
 ```
 
-### Uninstallation
-```bash
-curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/uninstall.sh | sh
-```
-
 ### Post-Installation
 After installation, set up your current shell with:
 ```bash
 . $HOME/.nix-profile/etc/profile.d/nix.sh
+```
+
+### Uninstallation
+```bash
+curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/uninstall.sh | sh
 ```
