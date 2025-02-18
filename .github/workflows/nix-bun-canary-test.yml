@@ -14,7 +14,7 @@ jobs:
 
     - name: Instalation
       run: |
-        curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/install.sh | sh
+        curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
     
     - name: Build package
       run: . $HOME/.nix-profile/etc/profile.d/nix.sh && nix build

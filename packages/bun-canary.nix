@@ -15,7 +15,7 @@
 
 stdenvNoCC.mkDerivation rec {
   version = "canary";
-  pname = "bun";
+  pname = "bun-canary";
 
   src = passthru.sources.${stdenvNoCC.hostPlatform.system} or (throw "Unsupported system: ${stdenvNoCC.hostPlatform.system}");
 
