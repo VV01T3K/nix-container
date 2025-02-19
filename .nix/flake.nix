@@ -24,7 +24,6 @@
           shellHook = ''
             export BUN_VERSION="$(bun --version)"
             echo "Using Bun version: $BUN_VERSION" | lolcat
-            echo test
           '';
         };
       }

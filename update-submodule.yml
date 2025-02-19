@@ -1,0 +1,12 @@
+name: Automatic Submodule Update
+
+on:
+  push:
+    branches: [ simple-flake-shell ]
+  pull_request:
+    branches: [ simple-flake-shell ]
+
+jobs:
+  main-branch-update:
+    runs-on: ubuntu-latest
+    steps:
