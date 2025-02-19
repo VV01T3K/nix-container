@@ -4,7 +4,13 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    bun-canary.url = "github:VV01T3K/nix-container/nix-bun-canary";
+    bun-canary = {
+      url = "github:VV01T3K/nix-container/nix-bun-canary";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs = { self, nixpkgs, flake-utils, bun-canary }:
