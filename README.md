@@ -12,32 +12,32 @@ You can use this package in several ways:
 Add to your `flake.nix`:
 
 ```nix
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    bun-canary = {
-      url = "github:VV01T3K/nix-container/nix-bun-canary";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
+inputs = {
+  nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  flake-utils.url = "github:numtide/flake-utils";
+  bun-canary = {
+    url = "github:VV01T3K/nix-container/nix-bun-canary";
+    inputs = {
+      flake-utils.follows = "flake-utils";
+      nixpkgs.follows = "nixpkgs";
     };
   };
+};
 
-  outputs = { self, nixpkgs, flake-utils, bun-canary }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        bun = bun-canary.packages.${system}.default;
-      in
-      with pkgs; {
-        devShells.default = mkShell {
-          buildInputs = [
-            bun
-          ];
-        };
-      }
-    );
+outputs = { self, nixpkgs, flake-utils, bun-canary }:
+  flake-utils.lib.eachDefaultSystem (system:
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
+      bun = bun-canary.packages.${system}.default;
+    in
+    with pkgs; {
+      devShells.default = mkShell {
+        buildInputs = [
+          bun
+        ];
+      };
+    }
+  );
 ```
 ### With `nix run`
 
