@@ -34,3 +34,12 @@ After installation, set up your current shell with:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/uninstall.sh | sh
 ```
+
+### Just install nix on unstable channel
+```bash
+curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/simple-install.sh | sh
+```
+### Just uninstall nix
+```bash
+curl -fsSL https://raw.githubusercontent.com/VV01T3K/nix-container/refs/heads/nix-wsl/simple-uninstall.sh | sh
+```
