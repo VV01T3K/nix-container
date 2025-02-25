@@ -12,7 +12,7 @@ RUN apk add --no-cache curl xz
 USER vscode
 
 # Install Nix
-RUN curl -L https://nixos.org/nix/install -o /tmp/nix-install.sh && \
+RUN echo "Alpine" && curl -L https://nixos.org/nix/install -o /tmp/nix-install.sh && \
     sh /tmp/nix-install.sh --no-daemon && \
     rm /tmp/nix-install.sh
 
