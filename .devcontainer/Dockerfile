@@ -1,18 +1,18 @@
-FROM mcr.microsoft.com/devcontainers/base:alpine-3.20
+FROM mcr.microsoft.com/devcontainers/base:jammy
 
 # Use "external" volume to store Nix store
 VOLUME /nix
 
 # Update and upgrade
-RUN apk update && apk upgrade
+RUN apt update -y && apt upgrade -y
 
 # Install required packages for Nix
-RUN apk add --no-cache curl xz
+RUN apt install -y curl xz-utils
     
 USER vscode
 
 # Install Nix
-RUN echo "Alpine" && curl -L https://nixos.org/nix/install -o /tmp/nix-install.sh && \
+RUN echo "Ubuntu" && curl -L https://nixos.org/nix/install -o /tmp/nix-install.sh && \
     sh /tmp/nix-install.sh --no-daemon && \
     rm /tmp/nix-install.sh
 
@@ -38,8 +38,6 @@ RUN nix profile install nixpkgs#direnv
 RUN echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc && \
     echo 'export DIRENV_LOG_FORMAT=""' >> ~/.zshrc && \
     echo 'eval "$(direnv hook bash)"' >> ~/.bashrc && \
-    echo 'export DIRENV_LOG_FORMAT=""' >> ~/.bashrc && \
-    echo 'echo "Hello! Welcome to your dev container 👋"' >> ~/.zshrc && \
-    echo 'echo "Hello! Welcome to your dev container 👋"' >> ~/.bashrc
+    echo 'export DIRENV_LOG_FORMAT=""' >> ~/.bashrc
 
 USER vscode

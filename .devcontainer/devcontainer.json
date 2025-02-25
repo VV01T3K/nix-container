@@ -1,5 +1,5 @@
 {
-	"name": "Nix",
+	"name": "Nix-Ubuntu",
 	"dockerComposeFile": "compose.yml",
 	"service": "dev",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
